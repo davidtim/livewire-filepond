@@ -63,10 +63,12 @@ $pondLocalizations = __('livewire-filepond::filepond');
           fileRenameFunction: (file) => {
                 const ext = file.name.split('.').pop();
                 const safeName = `upload-${Date.now()}.${ext}`;
+                console.log(safeName);
                 return safeName;
             },
           server: {
               process: async (fieldName, file, metadata, load, error, progress) => {
+                    console.log(fileName);
                   $dispatch('filepond-upload-started', '{{ $wireModelAttribute }}');
                   await @this.upload('{{ $wireModelAttribute }}', file, async (response) => {
                     let validationResult  = await @this.call('validateUploadedFile', response);
